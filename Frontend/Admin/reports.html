@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System - Reports</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-book"></i> LibrarySystem</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="#">Books</a></li>
+                    <li><a href="#">Members</a></li>
+                    <li><a href="#">Issues</a></li>
+                    <li><a href="#" class="active">Reports</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu">
+                <span class="user-role">Welcome, <span id="username">Admin</span><span class="admin-badge">Admin</span></span>
+                <a href="#" class="btn-logout">Logout</a>
+            </div>
+        </div>
+    </header>
+    
+    <section class="reports-container">
+        <div class="container">
+            <h2 class="section-title">Library Reports</h2>
+            
+            <div class="report-summary">
+                <h3 class="summary-title">Current Month Summary</h3>
+                <div class="summary-stats">
+                    <div class="summary-item">
+                        <div class="summary-value">142</div>
+                        <div class="summary-label">New Books Added</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value">89</div>
+                        <div class="summary-label">New Members</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value">312</div>
+                        <div class="summary-label">Books Issued</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="summary-value">276</div>
+                        <div class="summary-label">Books Returned</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="date-range">
+                <label for="start-date">From:</label>
+                <input type="date" id="start-date" name="start-date">
+                <label for="end-date">To:</label>
+                <input type="date" id="end-date" name="end-date">
+                <button type="button">Apply Filter</button>
+            </div>
+            
+            <div class="reports-grid">
+                <div class="report-card">
+                    <div class="report-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Book Inventory Report</h3>
+                    <p>Complete inventory of all books with their status, condition, and availability.</p>
+                    <div class="report-actions">
+                        <a href="#" class="btn-view">View Report</a>
+                        <a href="#" class="btn-download">Download PDF</a>
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Member Activity Report</h3>
+                    <p>Analysis of member activities including borrowing patterns and frequency.</p>
+                    <div class="report-actions">
+                        <a href="#" class="btn-view">View Report</a>
+                        <a href="#" class="btn-download">Download PDF</a>
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Circulation Statistics</h3>
+                    <p>Statistics on book circulation, popular titles, and peak borrowing periods.</p>
+                    <div class="report-actions">
+                        <a href="#" class="btn-view">View Report</a>
+                        <a href="#" class="btn-download">Download PDF</a>
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <h3>Overdue Books Report</h3>
+                    <p>List of all overdue books with member details and due dates.</p>
+                    <div class="report-actions">
+                        <a href="#" class="btn-view">View Report</a>
+                        <a href="#" class="btn-download">Download PDF</a>
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Category Analysis</h3>
+                    <p>Distribution of books across categories and their borrowing frequency.</p>
+                    <div class="report-actions">
+                        <a href="#" class="btn-view">View Report</a>
+                        <a href="#" class="btn-download">Download PDF</a>
+                    </div>
+                </div>
+                
+                <div class="report-card">
+                    <div class="report-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>Fine Collection Report</h3>
+                    <p>Summary of fines collected from overdue books and damaged items.</p>
+                    <div class="report-actions">
+                        <a href="#" class="btn-view">View Report</a>
+                        <a href="#" class="btn-download">Download PDF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fas fa-book"></i> LibrarySystem</h2>
+                    <p>An efficient library management solution</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="feedback.html">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> abc_info@librarysystem.com</p>
+                    <p><i class="fas fa-phone"></i> +88 01* **** ****</p>
+                    <p><i class="fas fa-map-marker-alt"></i> abc Library Street, Dhaka</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Check for admin access
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('libraryUser');
+            
+            if (userData) {
+                const user = JSON.parse(userData);
+                document.getElementById('username').textContent = user.name;
+                
+                // Redirect non-admin users
+                if (user.role !== 'admin') {
+                    alert('This page is only accessible to administrators.');
+                    window.location.href = '../index.html';
+                }
+            } else {
+                // No user logged in, redirect to login
+                alert('Please log in as an administrator to access this page.');
+                window.location.href = 'login.html';
+            }
+            
+            // Setup logout button
+            document.querySelector('.btn-logout').addEventListener('click', function(e) {
+                e.preventDefault();
+                localStorage.removeItem('libraryUser');
+                window.location.href = '../index.html';
+            });
+            
+            // Set default date values to current month
+            const today = new Date();
+            const firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+            const lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+            
+            document.getElementById('start-date').valueAsDate = firstDay;
+            document.getElementById('end-date').valueAsDate = lastDay;
+        });
+    </script>
+</body>
+</html>

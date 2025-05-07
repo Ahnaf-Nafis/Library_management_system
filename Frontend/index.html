@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Additional styles for the new interface */
+        .login-options {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-login, .btn-signup {
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-login {
+            background-color: #3498db;
+            color: white;
+            border: 1px solid #2980b9;
+        }
+        
+        .btn-signup {
+            background-color: #2ecc71;
+            color: white;
+            border: 1px solid #27ae60;
+        }
+        
+        .btn-login:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-signup:hover {
+            background-color: #27ae60;
+        }
+        
+        .welcome-user {
+            margin-right: 15px;
+            font-weight: 500;
+        }
+        
+        .btn-logout {
+            padding: 8px 15px;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid #c0392b;
+            cursor: pointer;
+        }
+        
+        .btn-logout:hover {
+            background-color: #c0392b;
+        }
+        
+        .logout-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2ecc71;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            animation: fadeInOut 3s ease-in-out;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; top: 0; }
+            10% { opacity: 1; top: 20px; }
+            90% { opacity: 1; top: 20px; }
+            100% { opacity: 0; top: 0; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-book"></i>XYZ Library</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="#">Books</a></li>
+                    <li id="members-nav" style="display:none;"><a href="#">Members</a></li>
+                    <li id="issues-nav" style="display:none;"><a href="#">Issues</a></li>
+                    <li id="reports-nav" style="display:none;"><a href="#">Reports</a></li>
+                </ul>
+            </nav>
+            <div class="user-menu" id="user-greeting">
+                <!-- Dynamic content will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 id="welcome-message">Welcome to Library Management System</h2>
+                <p>An efficient way to manage books, members, and borrowing records</p>
+                <div class="search-box">
+                    <input type="text" placeholder="Search for books, authors, categories...">
+                    <button><i class="fas fa-search"></i> Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card" id="book-feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Book Management</h3>
+                    <p>Add, update, and track all books in your library inventory</p>
+                </div>
+                <div class="feature-card" id="member-feature" style="display:none;">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Member Management</h3>
+                    <p>Manage member registrations and maintain member profiles</p>
+                </div>
+                <div class="feature-card" id="issue-feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3>Issue & Return</h3>
+                    <p>Efficiently handle book issuing and return processes</p>
+                </div>
+                <div class="feature-card" id="reports-feature" style="display:none;">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Reports & Analytics</h3>
+                    <p>Generate reports and analyze library usage statistics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="recent-books">
+        <div class="container">
+            <h2 class="section-title">Recently Added Books</h2>
+            <div class="book-grid">
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-info">
+                        <h3>The Great Gatsby</h3>
+                        <p class="author">F. Scott Fitzgerald</p>
+                        <p class="status available">Available</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-info">
+                        <h3>To Kill a Mockingbird</h3>
+                        <p class="author">Harper Lee</p>
+                        <p class="status available">Available</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-info">
+                        <h3>1984</h3>
+                        <p class="author">George Orwell</p>
+                        <p class="status issued">Issued</p>
+                    </div>
+                </div>
+                <div class="book-card">
+                    <div class="book-cover"></div>
+                    <div class="book-info">
+                        <h3>Pride and Prejudice</h3>
+                        <p class="author">Jane Austen</p>
+                        <p class="status available">Available</p>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more">
+                <a href="#" class="btn">View All Books</a>
+            </div>
+        </div>
+    </section>
+    
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">5,320</div>
+                    <div class="stat-title">Total Books</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2,150</div>
+                    <div class="stat-title">Active Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">320</div>
+                    <div class="stat-title">Books Issued</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15</div>
+                    <div class="stat-title">Categories</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h2><i class="fas fa-book"></i>ABC Library</h2>
+                    <p>"Today a reader, tomorrow a leader." - Margaret Fuller</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="user/feedback.html">Feedback</a></li>
+                        <li id="staff-login-footer"><a href="admin/login.html">Admin Login</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> abc_info@librarysystem.com</p>
+                    <p><i class="fas fa-phone"></i> +88 01* **** ****</p>
+                    <p><i class="fas fa-map-marker-alt"></i> abc Library Street, Dhaka</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Library Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Check for logout parameter in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const isLogout = urlParams.has('logout');
+        
+        // Check if user is logged in
+        let user = JSON.parse(localStorage.getItem('libraryUser')) || null;
+        
+        function updateUI() {
+            const userGreeting = document.getElementById('user-greeting');
+            const welcomeMessage = document.getElementById('welcome-message');
+            const membersNav = document.getElementById('members-nav');
+            const issuesNav = document.getElementById('issues-nav');
+            const reportsNav = document.getElementById('reports-nav');
+            const memberFeature = document.getElementById('member-feature');
+            const reportsFeature = document.getElementById('reports-feature');
+            const bookFeature = document.getElementById('book-feature');
+            const issueFeature = document.getElementById('issue-feature');
+            const staffLoginFooter = document.getElementById('staff-login-footer');
+            
+            if (user) {
+                // User is logged in
+                welcomeMessage.textContent = `Welcome back, ${user.name}!`;
+                
+                userGreeting.innerHTML = `
+                    <span class="welcome-user">Hello, ${user.name}</span>
+                    <button onclick="handleLogout()" class="btn-logout">Logout</button>
+                `;
+                
+                if (user.role === 'admin') {
+                    // Admin-specific features
+                    membersNav.style.display = 'block';
+                    issuesNav.style.display = 'block';
+                    reportsNav.style.display = 'block';
+                    memberFeature.style.display = 'block';
+                    reportsFeature.style.display = 'block';
+                    bookFeature.style.display = 'block';
+                    issueFeature.style.display = 'block';
+                    staffLoginFooter.style.display = 'none';
+                } else {
+                    // Regular user
+                    membersNav.style.display = 'none';
+                    issuesNav.style.display = 'none';
+                    reportsNav.style.display = 'none';
+                    memberFeature.style.display = 'none';
+                    reportsFeature.style.display = 'none';
+                    bookFeature.style.display = 'block';
+                    issueFeature.style.display = 'block';
+                    staffLoginFooter.style.display = 'block';
+                }
+            } else {
+                // No user logged in - default view
+                welcomeMessage.textContent = 'Welcome to Library Management System';
+                
+                userGreeting.innerHTML = `
+                    <div class="login-options">
+                        <a href="user/login.html" class="btn-login">User Login</a>
+                        <a href="admin/login.html" class="btn-signup">Admin Login</a>
+                    </div>
+                `;
+                
+                // Hide privileged elements
+                membersNav.style.display = 'none';
+                issuesNav.style.display = 'none';
+                reportsNav.style.display = 'none';
+                memberFeature.style.display = 'none';
+                reportsFeature.style.display = 'none';
+                bookFeature.style.display = 'block';
+                issueFeature.style.display = 'block';
+                staffLoginFooter.style.display = 'block';
+            }
+            
+            // Show logout message if applicable
+            if (isLogout) {
+                showLogoutMessage();
+                // Remove the logout parameter from URL
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
+        
+        function handleLogout() {
+            // Clear user data
+            localStorage.removeItem('libraryUser');
+            // Redirect to index.html
+            window.location.href = 'index.html?logout=true';
+        }
+        
+        function showLogoutMessage() {
+            const message = document.createElement('div');
+            message.className = 'logout-message';
+            message.textContent = 'You have been successfully logged out.';
+            document.body.prepend(message);
+            setTimeout(() => message.remove(), 3000);
+        }
+        
+        // Initialize UI when page loads
+        document.addEventListener('DOMContentLoaded', updateUI);
+    </script>
+</body>
+</html>

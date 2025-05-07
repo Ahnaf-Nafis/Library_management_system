@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+        <div class="form-container">
+            <form id="registerForm" action="../../Backend/auth/register_handler.php" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone">
+
+                <label for="address">Address:</label>
+                <textarea id="address" name="address"></textarea>
+
+                <button type="submit">Register</button>
+            </form>
+            <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        const success = urlParams.get('success');
+        if (error) {
+            document.getElementById('error').textContent = error;
+        }
+        if (success) {
+            document.getElementById('success').textContent = success;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="../user/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1>Login</h1>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Remember me</label>
+                </div>
+                <button type="submit" class="btn">Login</button>
+            </form>
+            <div id="error-message" class="error-message"></div>
+            <div class="form-footer">
+                <p>Don't have an account? <a href="register.html">Register here</a></p>
+                <a href="forget.html" class="forgot-password">Forgot Password?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const email = form.email.value.trim();
+            const password = form.password.value;
+            const remember = form.remember.checked;
+            const errorElement = document.getElementById('error-message');
+            
+            // Clear previous errors
+            errorElement.textContent = '';
+            errorElement.style.display = 'none';
+            
+            try {
+                // Show loading state
+                const submitBtn = form.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Logging in...';
+                
+                // Use relative path for better compatibility
+                const response = await fetch('../../Backend/auth/login_handler.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        password: password,
+                        remember: remember
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    localStorage.setItem('libraryUser', JSON.stringify({
+                        name: data.user.name,
+                        email: data.user.email,
+                        role: data.user.role,
+                        loggedIn: true
+                    }));
+                    
+                    window.location.href = data.redirect || '../index.html';
+                } else {
+                    throw new Error(data.message || 'Login failed');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                let errorMessage = error.message;
+                
+                if (error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Cannot connect to server. Please check your network and file paths.';
+                } else if (error.message.includes('Unexpected token')) {
+                    errorMessage = 'Server returned invalid response.';
+                } else if (error.message.includes('No response')) {
+                    errorMessage = 'Server is not responding.';
+                }
+                
+                showError(errorMessage);
+            } finally {
+                const submitBtn = form.querySelector('button[type="submit"]');
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Login';
+                }
+            }
+        });
+
+        function showError(message) {
+            const errorElement = document.getElementById('error-message');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
