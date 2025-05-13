@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRAC University Library</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <div class="navbar">
+      <h1>📚 BRAC University Library</h1>
+      <nav>
+        <a href="#">Home</a>
+        <a href="#">Books</a>
+        <a href="checkout.html">Checkout</a>
+        <a href="checkout.html" id="cart-link">🛒 <span id="cart-count">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h2>📘 Explore Knowledge at BRAC University Library</h2>
+    <p>Browse bestselling academic and literary works from our thoughtfully curated collection.</p>
+    <button>📖 Browse Books</button>
+  </section>
+
+  <section id="sale-section"></section>
+
+  <section id="book-list" class="book-grid"></section>
+
+  <footer>
+    <p>© 2025 BRAC University Library. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

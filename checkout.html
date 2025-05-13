@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - BRAC University Library</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <h1><i class="fas fa-book-reader"></i> BRAC University Library</h1>
+    <nav>
+      <a href="index.html">Back to Books</a>
+    </nav>
+  </header>
+
+  <main style="padding: 40px 20px; max-width: 1000px; margin: auto;">
+    <h2 style="margin-bottom: 20px;">🛒 Your Cart</h2>
+    <div id="cart-items" class="cart-list"></div>
+
+    <h3 style="margin-top: 40px;">Order Summary</h3>
+    <p>Total: $<span id="total-amount">0.00</span></p>
+
+    <form style="margin-top: 20px;">
+      <input type="text" placeholder="Full Name" required />
+      <input type="email" placeholder="Email Address" required />
+      <textarea placeholder="Shipping Address" required></textarea>
+      <button type="submit">Place Order</button>
+    </form>
+  </main>
+
+  <footer>
+    <p>© 2025 BRAC University Library. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const cartItemsContainer = document.getElementById("cart-items");
+    const totalAmountEl = document.getElementById("total-amount");
+
+    function loadCart() {
+      let cart;
+      try {
+        cart = JSON.parse(localStorage.getItem("cart")) || [];
+      } catch {
+        cart = [];
+      }
+
+      cartItemsContainer.innerHTML = "";
+      let total = 0;
+
+      if (!Array.isArray(cart) || cart.length === 0) {
+        cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+      } else {
+        cart.forEach((item, index) => {
+          const quantity = item.quantity || 1;
+          const price = item.price || 0;
+          const itemTotal = price * quantity;
+          total += itemTotal;
+
+          const div = document.createElement("div");
+          div.className = "cart-item";
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.title}">
+            <div class="details">
+              <h4>${item.title}</h4>
+              <p>${item.author}</p>
+              <p>$${price.toFixed(2)} × ${quantity} = $${itemTotal.toFixed(2)}</p>
+            </div>
+            <button class="remove-btn" onclick="removeFromCart(${index})">
+              <i class="fas fa-trash"></i>
+            </button>
+          `;
+          cartItemsContainer.appendChild(div);
+        });
+      }
+
+      totalAmountEl.textContent = total.toFixed(2);
+    }
+
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadCart();
+    }
+
+    // Show "Order Successful" message
+    document.addEventListener("DOMContentLoaded", () => {
+      loadCart();
+      const form = document.querySelector("form");
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        alert("✅ Order placed successfully!");
+        localStorage.removeItem("cart");
+        loadCart();
+        form.reset();
+      });
+    });
+  </script>
+
+  <style>
+    .cart-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 20px;
+      background: #fff;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      align-items: center;
+    }
+
+    .cart-item img {
+      width: 100px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-item .details {
+      flex-grow: 1;
+    }
+
+    .cart-item h4 {
+      margin-bottom: 5px;
+    }
+
+    .remove-btn {
+      background: #ff4d4f;
+      color: white;
+      border: none;
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    form input, form textarea {
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      width: 100%;
+    }
+
+    form button {
+      background-color: #004080;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #0059b3;
+    }
+  </style>
+</body>
+</html>
